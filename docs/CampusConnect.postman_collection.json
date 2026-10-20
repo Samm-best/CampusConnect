@@ -1,0 +1,15 @@
+{
+  "info": {"name":"CampusConnect API","description":"Starter collection. Register/login, copy the returned token into accessToken, and use a seeded admin for admin routes.","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable":[{"key":"baseUrl","value":"http://localhost:5000"},{"key":"accessToken","value":"PASTE_JWT_HERE"},{"key":"complaintId","value":"PASTE_COMPLAINT_ID_HERE"},{"key":"announcementId","value":"PASTE_ANNOUNCEMENT_ID_HERE"}],
+  "item":[
+    {"name":"Health","request":{"method":"GET","url":"{{baseUrl}}/api/health"}},
+    {"name":"Register Student","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"name\": \"Student One\",\n  \"email\": \"student1@example.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"admin\"\n}"},"url":"{{baseUrl}}/api/auth/register"}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"email\": \"student1@example.com\",\n  \"password\": \"Password123!\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"Current User","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"}],"url":"{{baseUrl}}/api/auth/me"}},
+    {"name":"Create Complaint","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"},{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"title\": \"Campus WiFi issue\",\n  \"description\": \"The WiFi in the library has not worked for two days.\",\n  \"category\": \"Technical\",\n  \"priority\": \"Medium\"\n}"},"url":"{{baseUrl}}/api/complaints"}},
+    {"name":"My Complaints","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"}],"url":"{{baseUrl}}/api/complaints/my"}},
+    {"name":"Read Complaint (ownership test)","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"}],"url":"{{baseUrl}}/api/complaints/{{complaintId}}"}},
+    {"name":"Admin Dashboard (must be admin)","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"}],"url":"{{baseUrl}}/api/admin/dashboard"}},
+    {"name":"List Announcements","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{accessToken}}"}],"url":"{{baseUrl}}/api/announcements?page=1&limit=10"}}
+  ]
+}
