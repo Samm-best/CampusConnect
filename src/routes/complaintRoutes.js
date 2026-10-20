@@ -1,5 +1,6 @@
 
 const r = require('express').Router();
+
 const c = require('../controllers/complaintController');
 const { authenticate, authorize } = require('../middleware/auth');
 

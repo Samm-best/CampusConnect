@@ -1,1 +1,16 @@
-const r=require('express').Router();const c=require('../controllers/announcementController');const {authenticate,authorize}=require('../middleware/auth');r.use(authenticate);r.get('/',c.list);r.get('/:id',c.get);r.post('/',authorize('admin'),c.create);r.patch('/:id',authorize('admin'),c.update);r.delete('/:id',authorize('admin'),c.remove);module.exports=r;
+
+const r = require('express').Router();
+
+const c = require('../controllers/announcementController');
+const { authenticate, authorize } = require('../middleware/auth');
+
+r.use(authenticate);
+
+r.get('/', c.list);
+r.get('/:id', c.get);
+
+r.post('/', authorize('admin'), c.create);
+r.patch('/:id', authorize('admin'), c.update);
+r.delete('/:id', authorize('admin'), c.remove);
+
+module.exports = r;
